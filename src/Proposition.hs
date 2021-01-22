@@ -9,4 +9,4 @@ data Proposition =
                 Disjunction Proposition Proposition|
                 Conditional Proposition Proposition|
                 Biconditional Proposition Proposition
-                deriving (Show)
+                deriving (Show,Eq)
