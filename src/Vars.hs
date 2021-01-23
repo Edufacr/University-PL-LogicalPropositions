@@ -8,6 +8,7 @@ vars :: Proposition -> [String]
 
 vars p = nub(vars' p)
     where 
+        vars' (Constant val)                = []
         vars' (Variable var)                = [var]
         vars' (Negation prop)               = vars' prop
         vars' (Conjuction prop1 prop2)      = vars' prop1 ++ vars' prop2
