@@ -15,8 +15,8 @@ taut prop =
         variables = vars prop
         n = toInteger(length variables)
         bools = genBools n
-        eval :: [[Bool]]-> Bool
         eval [] = True
+        eval :: [[Bool]] -> Bool
         evan booleans = 
             let 
                 recorrer :: [[Bool]] -> Bool 
@@ -31,7 +31,8 @@ taut prop =
             in 
                 recorrer bools
     in
-        if eval bools then 
-            "Es atutologia"
+        if eval bools 
+            then 
+                "Es tautologia"
             else
                 "No es tautologia"
