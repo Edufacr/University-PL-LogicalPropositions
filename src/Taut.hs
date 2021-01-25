@@ -13,7 +13,7 @@ taut :: Proposition -> String
 taut prop = 
     let 
         variables = vars prop
-        n = toInteger(length variables)
+        n = length variables
         bools = genBools n
 
         eval :: [[Bool]] -> Bool
