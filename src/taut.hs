@@ -35,6 +35,6 @@ taut prop =
     in
         if eval bools 
             then 
-                "Es atutologia"
+                "Es tautologia"
             else
                 "No es tautologia"
