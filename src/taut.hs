@@ -15,11 +15,13 @@ taut prop =
         variables = vars prop
         n = toInteger(length variables)
         bools = genBools n
-        eval [] = True
+
         eval :: [[Bool]] -> Bool
-        evan booleans = 
+        eval [] = True
+        eval booleans = 
             let 
                 recorrer :: [[Bool]] -> Bool 
+                recorrer [] = True
                 recorrer values = 
                     let 
                         headOfList = head values
@@ -33,6 +35,6 @@ taut prop =
     in
         if eval bools 
             then 
-                "Es tautologia"
+                "Es atutologia"
             else
                 "No es tautologia"
