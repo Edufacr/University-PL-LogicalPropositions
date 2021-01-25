@@ -12,14 +12,16 @@ evalProp (Disjunction prop1 prop2) asVals = evalProp prop1 asVals || evalProp pr
 evalProp (Conditional prop1 prop2) asVals = evalProp prop1 asVals --> evalProp prop2 asVals
 evalProp (Biconditional prop1 prop2) asVals = evalProp prop1 asVals <--> evalProp prop2 asVals
 
+-- Function to represent Biconditional logic operator
 (<-->) :: Bool -> Bool -> Bool
 (<-->) val1 val2 = val1 --> val2 && val2 --> val1
 
+-- Function to represent Conditional logic operator
 (-->) :: Bool -> Bool -> Bool
 (-->) val1 val2 = not val1 || val2
 
 getValue:: String -> [(String,Bool)] -> Bool
---getValue _ [] = error "Error test" -- ! Hay que ver lo de las exepciones   
+getValue _ [] = error "Error: Variable value not found"
 getValue var (x:xs)
     | var == fst x = snd x
     | otherwise = getValue var xs

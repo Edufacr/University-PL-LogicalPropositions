@@ -1,8 +1,5 @@
-module Vars(vars)
-where
-
+module Vars(vars) where
 import Proposition(Proposition(..))
-
 
 vars :: Proposition -> [String]
 
@@ -35,7 +32,3 @@ contains [] _ = False
 contains (x:xs) e
     | x == e = True
     | otherwise = contains xs e
-
-
-
-

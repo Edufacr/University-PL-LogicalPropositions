@@ -1,5 +1,4 @@
-module Proposition(Proposition(..))
-where
+module Proposition(Proposition(..)) where
 
 data Proposition = 
                 Constant Bool|
