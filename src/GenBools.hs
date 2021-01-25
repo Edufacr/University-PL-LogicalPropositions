@@ -5,7 +5,7 @@ where
 cons :: e -> [e] -> [e]
 cons x xs = x : xs
 
-genBools :: Integer -> [[Bool]]
+genBools :: Int -> [[Bool]]
 genBools 0 = [[]]
 genBools n = 
     let anterior = genBools (n-1)
