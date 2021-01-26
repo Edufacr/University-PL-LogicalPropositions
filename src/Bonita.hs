@@ -8,6 +8,8 @@ where
     bonita(Negation prop1) = 
         case prop1 of  
             (Constant propInside) -> (if propInside then "False" else "True")
+            (Variable propInside) -> "~" ++ propInside
+            _                     -> "~(" ++ bonita prop1 ++ ")"
     bonita(Constant prop1) = if prop1 then "True" else "False"
     bonita(Conjuction prop1 prop2) = 
         let mitad1 = 
