@@ -6,6 +6,7 @@ import Vars(vars)
 import GenBools(genBools)
 import As_Vals(asVals)
 import EvalProp(evalProp)
+import Bonita(bonita)
 import Data.List
 
 
@@ -35,6 +36,6 @@ taut prop =
     in
         if eval bools 
             then 
-                "Es tautologia"
+                bonita prop ++ " Es tautologia"
             else
-                "No es tautologia"
+                bonita prop ++ " No es tautologia por " 
