@@ -16,6 +16,7 @@ fnd prop        = fnd' (filter (evalProp prop) varVals)
 fnd' :: [[(String,Bool)]] -> Proposition 
 
 fnd' []     = Constant False
+fnd' [[]]   = Constant False
 fnd' (x:[]) = primeTerm x
 fnd' (x:xs) = Disjunction (primeTerm x) (fnd' xs)
 
