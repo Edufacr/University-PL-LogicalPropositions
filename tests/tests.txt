@@ -1,0 +1,157 @@
+* * * * * *
+Function:Vars
+* * * * * *  
+
+Test: 1      
+Proposition: (p^q)=>(pvq)
+List of Variables:
+["p","q"]
+
+Test: 2
+Proposition: ~(p^r^q)=>False=>s
+List of Variables:
+["p","r","q","s"]
+
+Test: 3
+Proposition: False^False=>True=>True
+List of Variables:
+[]
+* * * * * *
+Function:Gen_Bools
+* * * * * *
+
+Test: 1
+N = 0
+Output:
+[[]]
+
+Test: 2
+N = 1
+Output:
+[[True],[False]]
+
+Test: 3
+N = 3
+Output:
+[[True,True,True],[True,True,False],[True,False,True],[True,False,False],[False,True,True],[False,True,False],[False,False,True],[False,False,False]]
+* * * * * *
+Function:As_Vals
+* * * * * *
+
+Test: 1
+List of Variables:
+["p","q","r"]
+List of Bools:
+[True,False,False]
+Output:
+[("p",True),("q",False),("r",False)]
+
+Test: 2
+List of Variables:
+["p"]
+List of Bools:
+[True,False,False]
+Output:
+[("p",True)]
+
+Test: 3
+List of Variables:
+["p","q","r"]
+List of Bools:
+[True]
+Output:
+Error: Not enough values given
+CallStack (from HasCallStack):
+  error, called at src/As_Vals.hs:15:18 in main:As_Vals
+
+Test: 4
+List of Variables:
+[]
+List of Bools:
+[]
+Output:
+[]
+* * * * * *
+Function:Eval_Prop
+* * * * * *
+
+Test: 1
+Proposition: False^False=>True=>True
+Values:
+[]
+Result:
+True
+
+Test: 2
+Proposition: ~(p^r^q)=>False=>s
+Values:
+[("p",True),("r",True),("q",True),("s",False)]
+Result:
+False
+
+Test: 3
+Proposition: ~(p^r^q)=>False=>s
+Values:
+[("p",False),("r",True),("q",True),("s",False)]
+Result:
+True
+
+Test: 1
+Proposition: ~(p^r^q)=>False=>s
+Values:
+[]
+Result:
+Error: Error: Variable value not found
+CallStack (from HasCallStack):
+  error, called at src/EvalProp.hs:24:17 in main:EvalProp
+* * * * * *
+Function:Taut
+* * * * * *
+
+Test: 1
+Proposition: (p^q)=>(pvq)
+Output: 
+(p^q)=>(pvq) Es tautologia
+
+Test: 2
+Proposition: ~(p^r^q)=>False=>s
+Output:
+~(p^r^q)=>False=>s No es tautologia por
+
+Test: 3
+Proposition: False^False=>True=>True
+Output:
+False^False=>True=>True Es tautologia
+* * * * * *
+Function:Fnd
+* * * * * *
+
+Test: 1
+Proposition: (p^q)=>(pvq)
+Output:
+p^qvp^~qv(~p^q)v(~p^~q)
+
+Test: 2
+Proposition: ~(p^r^q)=>False=>s
+Output:
+p^r^q^svp^r^~q^svp^r^~q^~svp^~r^q^svp^~r^q^~svp^~r^~q^svp^~r^~q^~sv~p^r^q^sv~p^r^q^~sv~p^r^~q^sv~p^r^~q^~sv~p^~r^q^sv~p^~r^q^~sv(~p^~r^~q^s)v(~p^~r^~q^~s)
+
+Test: 3
+Proposition: False^False=>True=>True
+Output:
+False
+
+Test: 4
+Proposition: ~p^p
+Output: 
+False
+
+Test: 5
+Proposition: (~p^q)v(~q^p)
+Output:
+(p^~q)v(~p^q)
+* * * * * *
+Function:Bonita
+* * * * * *
+True
+~(~(~p))^True
