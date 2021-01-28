@@ -8,6 +8,7 @@ import As_Vals(asVals)
 import EvalProp(evalProp)
 import Bonita(bonita)
 import Data.List
+import Debug.Trace (traceShow)
 
 
 taut :: Proposition -> String
@@ -30,7 +31,12 @@ taut prop =
                         asignacion = asVals variables headOfList
                         isEvaluationTrue = evalProp prop asignacion
                     in 
-                        (isEvaluationTrue && recorrer tailOfList)
+                        if isEvaluationTrue
+                            then recorrer tailOfList
+                        else
+                            traceShow ( bonita prop ++ (" No es tautologia para la asignacion " ++ intercalate ", " variables ++ " con " ++ intercalate ", " (map boolToString headOfList)  ))
+                            False
+                        --(isEvaluationTrue && recorrer tailOfList)
             in 
                 recorrer bools
     in
@@ -38,4 +44,7 @@ taut prop =
             then 
                 bonita prop ++ " Es tautologia"
             else
-                bonita prop ++ " No es tautologia por " 
+                "" 
+
+boolToString :: Bool -> String
+boolToString val = if val then "True" else "False"
