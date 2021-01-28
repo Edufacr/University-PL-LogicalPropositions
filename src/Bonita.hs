@@ -69,7 +69,7 @@ where
                 "("++ bonita prop2 ++ ")"
                 else bonita prop2
         in 
-            mitad1 ++ "=>" ++ mitad2
+            mitad1 ++ "<=>" ++ mitad2
 
             
     presedencia :: Proposition -> Int
