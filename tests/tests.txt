@@ -1,42 +1,68 @@
 * * * * * *
-Function:Vars
-* * * * * *  
+Function: Vars
+* * * * * *
 
-Test: 1      
+
+Caso donde se repiten variables
+
+Test: 1
 Proposition: (p^q)=>(pvq)
 List of Variables:
 ["p","q"]
 
+Caso con 4 variables
+
 Test: 2
-Proposition: ~(p^r^q)=>False=>s
+Proposition: ~(p^r^q)<=>False=>s
 List of Variables:
 ["p","r","q","s"]
+
+Caso donde donde no hay variables
 
 Test: 3
 Proposition: False^False=>True=>True
 List of Variables:
 []
+
 * * * * * *
-Function:Gen_Bools
+Function: Gen_Bools
 * * * * * *
+
+
+Caso donde el numero de variables es 0
 
 Test: 1
 N = 0
 Output:
 [[]]
 
+Caso donde el numero de variables es -1
+
 Test: 2
+N = -1
+Output:
+[[]]
+
+Caso donde el numero de variables es 1
+
+Test: 3
 N = 1
 Output:
 [[True],[False]]
 
+Caso donde el numero de variables es 2
+
 Test: 3
-N = 3
+N = 2
 Output:
-[[True,True,True],[True,True,False],[True,False,True],[True,False,False],[False,True,True],[False,True,False],[False,False,True],[False,False,False]]
+[[True,True],[True,False],[False,True],[False,False]]
+
 * * * * * *
-Function:As_Vals
+Function: As_Vals
 * * * * * *
+
+
+Caso donde el tamaño de las listas es igual
 
 Test: 1
 List of Variables:
@@ -46,6 +72,8 @@ List of Bools:
 Output:
 [("p",True),("q",False),("r",False)]
 
+Caso donde la lista de bools es mas grande que la de variables
+
 Test: 2
 List of Variables:
 ["p"]
@@ -53,6 +81,8 @@ List of Bools:
 [True,False,False]
 Output:
 [("p",True)]
+
+Caso donde la lista de variables es mas grande que la de bools
 
 Test: 3
 List of Variables:
@@ -64,6 +94,8 @@ Error: Not enough values given
 CallStack (from HasCallStack):
   error, called at src/As_Vals.hs:15:18 in main:As_Vals
 
+Caso donde las listas son vacias
+
 Test: 4
 List of Variables:
 []
@@ -71,9 +103,13 @@ List of Bools:
 []
 Output:
 []
+
 * * * * * *
-Function:Eval_Prop
+Function: Eval_Prop
 * * * * * *
+
+
+Caso donde no hay variables
 
 Test: 1
 Proposition: False^False=>True=>True
@@ -82,76 +118,117 @@ Values:
 Result:
 True
 
+Caso donde el resultado es true
+
 Test: 2
-Proposition: ~(p^r^q)=>False=>s
+Proposition: ~(p^r^q)<=>False=>s
 Values:
 [("p",True),("r",True),("q",True),("s",False)]
 Result:
 False
 
+Caso donde el resultado es false
+
 Test: 3
-Proposition: ~(p^r^q)=>False=>s
+Proposition: ~(p^r^q)<=>False=>s
 Values:
 [("p",False),("r",True),("q",True),("s",False)]
 Result:
 True
 
-Test: 1
-Proposition: ~(p^r^q)=>False=>s
+Caso donde las listas de valores es vacia
+
+Test: 4
+Proposition: ~(p^r^q)<=>False=>s
 Values:
 []
 Result:
 Error: Error: Variable value not found
 CallStack (from HasCallStack):
   error, called at src/EvalProp.hs:24:17 in main:EvalProp
+
 * * * * * *
-Function:Taut
+Function: Taut
 * * * * * *
+
+
+Caso donde es tautologia
 
 Test: 1
 Proposition: (p^q)=>(pvq)
-Output: 
+Output:
+Conditional (Conjuction (Variable "p") (Variable "q")) (Disjunction (Variable "p") (Variable "q"))
 (p^q)=>(pvq) Es tautologia
 
+Caso donde no es tautologia
+
 Test: 2
-Proposition: ~(p^r^q)=>False=>s
+Proposition: ~(p^r^q)<=>False=>s
 Output:
-~(p^r^q)=>False=>s No es tautologia por
+"Conditional (Biconditional (Negation (Conjuction (Conjuction (Variable \"p\") (Variable \"r\")) (Variable \"q\"))) (Constant False)) (Variable \"s\")\n~(p^r^q)<=>False=>s No es tautologia para la asignacion p, r, q, s con True, True, True, False"
+
+
+Caso donde no hay variables
 
 Test: 3
 Proposition: False^False=>True=>True
 Output:
+Conditional (Conjuction (Negation (Constant True)) (Constant False)) (Conditional (Constant True) (Constant True))
 False^False=>True=>True Es tautologia
+
 * * * * * *
-Function:Fnd
+Function: Fnd
 * * * * * *
+
+
+Caso con variables repetidas
 
 Test: 1
 Proposition: (p^q)=>(pvq)
 Output:
 p^qvp^~qv(~p^q)v(~p^~q)
 
+Caso con 4 varibales y todas las proposiciones
+
 Test: 2
-Proposition: ~(p^r^q)=>False=>s
+Proposition: ~(p^r^q)<=>False=>s
 Output:
 p^r^q^svp^r^~q^svp^r^~q^~svp^~r^q^svp^~r^q^~svp^~r^~q^svp^~r^~q^~sv~p^r^q^sv~p^r^q^~sv~p^r^~q^sv~p^r^~q^~sv~p^~r^q^sv~p^~r^q^~sv(~p^~r^~q^s)v(~p^~r^~q^~s)
+
+Caso donde no hay variables
 
 Test: 3
 Proposition: False^False=>True=>True
 Output:
 False
 
+Caso donde la proposicion es una contradiccion
+
 Test: 4
 Proposition: ~p^p
 Output: 
 False
 
+Caso donde ya se encuentra en forma normal
+
 Test: 5
 Proposition: (~p^q)v(~q^p)
 Output:
 (p^~q)v(~p^q)
+
 * * * * * *
-Function:Bonita
+Function: Bonita
 * * * * * *
+
+
+Caso donde se encuentran todas las proposiciones
+Conditional (Biconditional (Negation (Conjuction (Conjuction (Variable "p") (Variable "r")) (Variable "q"))) (Constant False)) (Variable "s")       
+~(p^r^q)<=>False=>s
+
+Caso donde se encuentra una constante negada
+Negation (Constant False)
 True
+
+Caso con triple negacion
+Conjuction (Negation (Negation (Negation (Variable "p")))) (Constant True)
 ~(~(~p))^True
